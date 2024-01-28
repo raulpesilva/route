@@ -17,11 +17,11 @@ export const initialFlags = {
   flagB: false,
 };
 
-const myFirstRule = createRule(initialFlags).need('flagA');
-const mySecondRule = createRule(initialFlags).not.need('flagB').need('flagA');
+const myFirstRule = createRule(initialFlags).have('flagA');
+const mySecondRule = createRule(initialFlags).not.have('flagB').have('flagA');
 ```
 
-### Migrating Routes
+### Migrando Routes
 
 import Route utils
 
@@ -29,7 +29,7 @@ import Route utils
 import { AllowedRoutes, AllowRoute } from 'permission';
 ```
 
-#### From
+#### De
 
 ```tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -46,7 +46,7 @@ const AppRoutes = () => {
 };
 ```
 
-#### To
+#### Para
 
 ```tsx
 import { BrowserRouter, Route } from 'react-router-dom';
