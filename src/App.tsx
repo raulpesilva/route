@@ -74,19 +74,22 @@ function App() {
       <AllowedRoutes rules={rules}>
         <AllowRoute when={[showEntryRule]}>
           <AllowRoute when={[showEntryRule]}>
-            <AllowRoute when={[showEntryRule]}>
+            <AllowRoute>
               <AllowRoute when={[showVariableIncome]}>
                 <Route path="/" element={<Page page="Home Private" />} />
               </AllowRoute>
             </AllowRoute>
           </AllowRoute>
         </AllowRoute>
+        <></>
         <>
           <AllowRoute when={[notEntry]}>
             <Route index element={<Page page="Home Public" />} />
             <Route path="/6">
               <Route index element={<Page page="Home 6 Public" />} />
-              <Route path="bla" element={<Page page="Home 6 bla" />} />
+              <AllowRoute when={[notEntry]}>
+                <Route path="bla" element={<Page page="Home 6 bla" />} />
+              </AllowRoute>
             </Route>
             {/* <Route path="/6" element={<Page page="Home 6 Public" />} /> */}
           </AllowRoute>
