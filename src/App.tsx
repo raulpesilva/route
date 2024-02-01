@@ -3,6 +3,103 @@ import { BrowserRouter, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import { Allow, AllowRoute, AllowedRoutes, createRule } from './Permission';
 
+const brands = {
+  xp: {
+    ['EXPERIENCE_ENTRY']: true,
+    ['FEATURE_ENTRY_VARIABLE_INCOME']: true,
+    ['FEATURE_ENTRY_FIXED_INCOME']: true,
+    ['FEATURE_ENTRY_FMP']: true,
+    ['FEATURE_ENTRY_INVESTMENT_FUNDS']: true,
+    ['FEATURE_ENTRY_COE']: true,
+    ['FEATURE_ENTRY_FORESIGHT']: true,
+
+    ['EXPERIENCE_EXIT']: true,
+    ['FEATURE_EXIT_FIXED_INCOME']: true,
+    ['FEATURE_EXIT_VARIABLE_INCOME']: true,
+    ['FEATURE_EXIT_TREASURE_BOUNDS']: true,
+    ['FEATURE_EXIT_INVESTMENT_FUNDS']: true,
+    ['FEATURE_EXIT_FMP']: true,
+
+    ['EXPERIENCE_MY_SOLICITATIONS']: true,
+    ['EXPERIENCE_MY_SOLICITATIONS_B3']: true,
+  },
+  rico: {
+    ['EXPERIENCE_ENTRY']: true,
+    ['FEATURE_ENTRY_VARIABLE_INCOME']: true,
+    ['FEATURE_ENTRY_FIXED_INCOME']: true,
+    ['FEATURE_ENTRY_INVESTMENT_FUNDS']: true,
+    ['FEATURE_ENTRY_FMP']: true,
+    ['FEATURE_ENTRY_COE']: true,
+    ['FEATURE_ENTRY_FORESIGHT']: true,
+
+    ['EXPERIENCE_EXIT']: true,
+    ['FEATURE_EXIT_FIXED_INCOME']: true,
+    ['FEATURE_EXIT_VARIABLE_INCOME']: true,
+    ['FEATURE_EXIT_TREASURE_BOUNDS']: true,
+    ['FEATURE_EXIT_INVESTMENT_FUNDS']: true,
+    ['FEATURE_EXIT_FMP']: true,
+
+    ['EXPERIENCE_MY_SOLICITATIONS']: true,
+    ['EXPERIENCE_MY_SOLICITATIONS_B3']: true,
+  },
+  clear: {
+    ['EXPERIENCE_ENTRY']: true,
+    ['FEATURE_ENTRY_VARIABLE_INCOME']: true,
+    ['FEATURE_ENTRY_FIXED_INCOME']: false,
+    ['FEATURE_ENTRY_INVESTMENT_FUNDS']: false,
+    ['FEATURE_ENTRY_FMP']: false,
+    ['FEATURE_ENTRY_COE']: false,
+    ['FEATURE_ENTRY_FORESIGHT']: false,
+
+    ['EXPERIENCE_EXIT']: true,
+    ['FEATURE_EXIT_FIXED_INCOME']: false,
+    ['FEATURE_EXIT_VARIABLE_INCOME']: true,
+    ['FEATURE_EXIT_TREASURE_BOUNDS']: false,
+    ['FEATURE_EXIT_INVESTMENT_FUNDS']: false,
+    ['FEATURE_EXIT_FMP']: false,
+
+    ['EXPERIENCE_MY_SOLICITATIONS']: true,
+    ['EXPERIENCE_MY_SOLICITATIONS_B3']: true,
+  },
+  default: {
+    ['EXPERIENCE_ENTRY']: true,
+    ['FEATURE_ENTRY_VARIABLE_INCOME']: true,
+    ['FEATURE_ENTRY_FIXED_INCOME']: false,
+    ['FEATURE_ENTRY_INVESTMENT_FUNDS']: false,
+    ['FEATURE_ENTRY_FMP']: false,
+    ['FEATURE_ENTRY_COE']: false,
+    ['FEATURE_ENTRY_FORESIGHT']: false,
+
+    ['EXPERIENCE_EXIT']: true,
+    ['FEATURE_EXIT_FIXED_INCOME']: false,
+    ['FEATURE_EXIT_VARIABLE_INCOME']: true,
+    ['FEATURE_EXIT_TREASURE_BOUNDS']: false,
+    ['FEATURE_EXIT_INVESTMENT_FUNDS']: false,
+    ['FEATURE_EXIT_FMP']: false,
+
+    ['EXPERIENCE_MY_SOLICITATIONS']: true,
+    ['EXPERIENCE_MY_SOLICITATIONS_B3']: true,
+  },
+};
+
+const showEntry = createRule(brands.default).have('EXPERIENCE_ENTRY');
+const showEntryVariableIncome = createRule(brands.default).have('FEATURE_ENTRY_VARIABLE_INCOME');
+const showEntryFixedIncome = createRule(brands.default).have('FEATURE_ENTRY_FIXED_INCOME');
+const showEntryInvestmentFunds = createRule(brands.default).have('FEATURE_ENTRY_INVESTMENT_FUNDS');
+const showEntryFMP = createRule(brands.default).have('FEATURE_ENTRY_INVESTMENT_FUNDS').have('FEATURE_ENTRY_FMP');
+const showEntryCOE = createRule(brands.default).have('FEATURE_ENTRY_COE');
+const showEntryForesight = createRule(brands.default).have('FEATURE_ENTRY_FORESIGHT');
+
+const showExit = createRule(brands.default).have('EXPERIENCE_EXIT');
+const showExitFixedIncome = createRule(brands.default).have('FEATURE_EXIT_FIXED_INCOME');
+const showExitVariableIncome = createRule(brands.default).have('FEATURE_EXIT_VARIABLE_INCOME');
+const showExitTreasureBounds = createRule(brands.default).have('FEATURE_EXIT_TREASURE_BOUNDS');
+const showExitInvestmentFunds = createRule(brands.default).have('FEATURE_EXIT_INVESTMENT_FUNDS');
+const showExitFMP = createRule(brands.default).have('FEATURE_EXIT_FMP');
+
+const showMySolicitations = createRule(brands.default).have('EXPERIENCE_MY_SOLICITATIONS');
+const showMySolicitationsB3 = createRule(brands.default).have('EXPERIENCE_MY_SOLICITATIONS_B3');
+
 const _rules = {
   xp: {
     entry: true,
