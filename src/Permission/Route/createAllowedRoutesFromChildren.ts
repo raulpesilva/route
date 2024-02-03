@@ -1,11 +1,8 @@
 import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
-import { RuleMaker } from '..';
+import { isAllowed } from '../utils';
 import { AllowRoute } from './AllowRoute';
 
-const runRules = <T extends Record<string, boolean>>(flags: T) => {
-  return (rules: RuleMaker<T>) => rules.execute(flags);
-};
 export const createAllowedRoutesFromChildren = (children: React.ReactNode, rules: Record<string, boolean>) => {
   const routes: React.JSX.Element[] = [];
   React.Children.forEach(children, (element) => {
@@ -25,10 +22,10 @@ export const createAllowedRoutesFromChildren = (children: React.ReactNode, rules
     }
 
     const isAllowRoute = element.type === AllowRoute;
-    const isAllowed = isAllowRoute && (element.props.when === undefined || element.props.when?.some(runRules(rules)));
-    if (isAllowRoute && isAllowed && children) return routes.push(...createAllowedRoutesFromChildren(children, rules));
-    if (isAllowRoute && isAllowed && !children) return;
-    if (isAllowRoute && !isAllowed) return;
+    const keep = isAllowRoute && (element.props.when === undefined || isAllowed(element.props.when, rules));
+    if (isAllowRoute && keep && children) return routes.push(...createAllowedRoutesFromChildren(children, rules));
+    if (isAllowRoute && keep && !children) return;
+    if (isAllowRoute && !keep) return;
 
     const name = typeof element.type === 'string' ? element.type : element.type.name;
     throw new Error(
