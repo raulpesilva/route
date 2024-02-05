@@ -1,4 +1,5 @@
-import { Rule, useIsAllowed } from '..';
+import { Rule } from '..';
+import { useIsAllowed } from '../hooks';
 
 export const Allow = ({ children, when }: { children: React.ReactNode; when: Rule[] }) => {
   const isAllowed = useIsAllowed(when);
