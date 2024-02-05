@@ -6,4 +6,4 @@ type AllowRouteProps = RouteProps & {
   when?: Rule[];
 };
 
-export const AllowRoute = ({ children }: AllowRouteProps) => children;
+export const AllowRoute = ({ children }: AllowRouteProps) => <>{children}</>;

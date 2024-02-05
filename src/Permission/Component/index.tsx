@@ -6,5 +6,5 @@ export const Allow = ({ children, when }: { children: React.ReactNode; when: Rul
   const rules = useRules();
   const isValid = useMemo(() => isAllowed(when, rules), [when, rules]);
   if (!isValid) return null;
-  return children;
+  return <>{children}</>;
 };
